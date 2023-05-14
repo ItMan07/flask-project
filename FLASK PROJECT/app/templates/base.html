@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>{% block title %} {% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body>
+<div id="wrapper">
+    <header class="p-3 text-bg-dark bg-dark">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                        {#                        <use href="../static/vladimir-soloviev.png"></use>#}
+                        {#                        <use href="{{ '../static/images/vladimir-soloviev.png' }}"></use>#}
+                        {#                        <img src="../static/vladimir-soloviev.png" class="img-fluid" alt="">#}
+                        {#                        <img src="{{ url_for('static', filename='vladimir_soloviev.png') }}" alt="">#}
+                        <img src="{{ '../static/images/vladimir-soloviev.png' }}" class="mr-2" height="36px"
+                             width="50px" alt="">
+                    </svg>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="/" class="nav-link mr-2 px-2 text-white btn btn-outline-light">Главная</a></li>
+                    <li><a href="/create_news" class="nav-link mr-2 px-2 text-white btn btn-outline-light">Создать
+                        ложь</a></li>
+                    <li><a href="/create_category" class="nav-link mr-2 px-2 text-white btn btn-outline-light">Категории
+                        лжи</a></li>
+                    <li><a href="/about" class="nav-link px-2 text-white btn btn-outline-light">О проекте</a></li>
+                </ul>
+
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                    <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Поиск..."
+                           aria-label="Search">
+                </form>
+
+                <div class="text-end">
+                    <a href="/login" class="btn btn-success me-2 mr-1">Вход</a>
+                    <a href="/register" class="btn btn-warning">Регистрация</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-md-8">
+                {% block content %} {% endblock %}
+            </div>
+            <div class="col-md-4">
+                <h5>Категории лжи</h5>
+
+                <ul class="list-group">
+                    {% for item in categories %}
+                        <li class="list-group-item"><a
+                                href="{{ url_for('news_in_category', id=item.id) }}">{{ item.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer" class="bg-dark text-white text-center py-3">
+        &copy; 2023 Новости. Все права НЕ защищены.
+    </footer>
+
+</div>
+
+<!-- Подключаем Bootstrap JS -->
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+</body>
+</html>
