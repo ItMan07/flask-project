@@ -14,8 +14,8 @@
                 <a href="{{ url_for('news_detail', news_id=news.id) }}" class="btn btn-primary">Читать далее</a>
             </div>
             <div class="card-footer">
-                {% if news.created_date %}
-                    <span class="card-link">Дата создания: {{ news.created_date.strftime('%d.%m.%Y') }}</span>
+                {% if news.create_date %}
+                    <span class="card-link">Дата создания: {{ news.create_date.strftime('%d.%m.%Y') }}</span>
                 {% endif %}
                 {% if news.category %}
                     <span class="card-link">Категория: <a

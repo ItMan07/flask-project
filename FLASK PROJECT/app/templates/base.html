@@ -16,18 +16,19 @@
     <header class="p-3 text-bg-dark bg-dark">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <a href="/" class="nav align-items-center">
                     <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
                         {#                        <use href="../static/vladimir-soloviev.png"></use>#}
                         {#                        <use href="{{ '../static/images/vladimir-soloviev.png' }}"></use>#}
                         {#                        <img src="../static/vladimir-soloviev.png" class="img-fluid" alt="">#}
                         {#                        <img src="{{ url_for('static', filename='vladimir_soloviev.png') }}" alt="">#}
-                        <img src="{{ '../static/images/vladimir-soloviev.png' }}" class="mr-2" height="36px"
+                        <img src="{{ url_for('static', filename='images/vladimir-soloviev.png') }}" class="mr-2"
+                             height="36px"
                              width="50px" alt="">
                     </svg>
                 </a>
 
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 mb-md-0 justify-content-center">
                     <li><a href="/" class="nav-link mr-2 px-2 text-white btn btn-outline-light">Главная</a></li>
                     <li><a href="/create_news" class="nav-link mr-2 px-2 text-white btn btn-outline-light">Создать
                         ложь</a></li>
@@ -36,14 +37,15 @@
                     <li><a href="/about" class="nav-link px-2 text-white btn btn-outline-light">О проекте</a></li>
                 </ul>
 
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                <form class="nav col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                     <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Поиск..."
                            aria-label="Search">
                 </form>
 
-                <div class="text-end">
+                <div class="nav text-end">
                     <a href="/login" class="btn btn-success me-2 mr-1">Вход</a>
-                    <a href="/register" class="btn btn-warning">Регистрация</a>
+                    <a href="/register" class="btn btn-warning mr-1">Регистрация</a>
+                    <a href="/logout" class="btn btn-danger mr-1">Выход</a>
                 </div>
             </div>
         </div>

@@ -20,18 +20,15 @@ def about():
 
 
 @app.route('/news/<int:news_id>')
-@login_required
 def news_detail(news_id):
     news = News.query.get(news_id)
-    categories = Category.query.all()
-    return render_template('news_detail.html', news=news, categories=categories)
+    return render_template('news_detail.html', news=news, categories=Category.query.all())
 
 
 @app.route('/create_news', methods=['POST', 'GET'])
 @login_required
 def create_news():
     form = NewsForm()
-    categories = Category.query.all()
     if form.validate_on_submit():
         news = News()
         news.title = form.title.data
@@ -40,7 +37,7 @@ def create_news():
         db.session.add(news)
         db.session.commit()
         return redirect(url_for('index'))
-    return render_template('create_news.html', form=form, categories=categories)
+    return render_template('create_news.html', form=form, categories=Category.query.all())
 
 
 @app.route('/category/<int:id>')
@@ -48,11 +45,10 @@ def news_in_category(id):
     category = Category.query.get(id)
     news = category.news
     category_name = category.title
-    categories = Category.query.all()
     return render_template('category.html',
                            news=news,
                            category_name=category_name,
-                           categories=categories)
+                           categories=Category.query.all())
 
 
 @app.route('/news/edit/<int:news_id>', methods=['GET', 'POST'])
@@ -60,14 +56,14 @@ def news_in_category(id):
 def news_edit(news_id):
     form = NewsForm()
     if form.validate_on_submit():
-        news = News()
+        news = db.session.get(news_id)
         news.title = form.title.data
         news.text = form.text.data
-        # db.session.
-        # db.session.add(news)
-        # db.session.commit()
+        news.category_id = form.category.data
+        db.session.add(news)
+        db.session.commit()
         return redirect(url_for('index'))
-    return render_template('create_news.html', form=form)
+    return render_template('edit_news.html', form=form, categories=Category.query.all())
     # return redirect(url_for('create_news'))
 
 
@@ -90,7 +86,7 @@ def create_category():
         db.session.add(category)
         db.session.commit()
         return redirect(url_for('index'))
-    return render_template('create_category.html', form=form)
+    return render_template('create_category.html', form=form, categories=Category.query.all())
 
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -106,7 +102,7 @@ def register():
         print('register user')
         return redirect(url_for('login'))
 
-    return render_template('register.html', form=form)
+    return render_template('register.html', form=form, categories=Category.query.all())
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -129,7 +125,7 @@ def login():
             print('Login or password is not correct')
             pass
 
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, categories=Category.query.all())
 
 
 @login_required

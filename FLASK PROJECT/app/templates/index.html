@@ -6,7 +6,7 @@
     <h4 class="text-center">Это самые правдивые новости Солофьева, которым позавидует весь загнивающий Запад! (и даже
         укронацисты!)</h4>
     <hr>
-    {% for item in news %}
+    {% for item in news | reverse %}
         <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title">{{ item.title }}</h5>

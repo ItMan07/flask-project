@@ -3,13 +3,20 @@
 
 {% block content %}
     <h1 class="text-center">Солофьев новости</h1> <br>
-    <h3>{{ news.title }}</h3>
-    <p class="text-secondary">Дата: {{ news.create_date.strftime('%d.%m.%Y') }}</p>
+    <h3>{{ news.title }}</h3> <br>
+    <div class="row">
+        <div class="col text-left">
+            {#    <p class="text-secondary">{{ news.category.title }}</p>#}
+            <p>{{ news.category.title }}</p>
+        </div>
+        <div class="col text-right">
+            {#    <p class="text-secondary">{{ news.create_date.strftime('%d.%m.%Y') }}</p>#}
+            <p>{{ news.create_date.strftime('%d.%m.%Y') }}</p>
+        </div>
+    </div>
     <hr>
     <p style="font-size: 20px">{{ news.text }}</p>
     <hr>
-
-
     <a href="/news/{{ news.id }}/delete" class="btn btn-danger"> Стереть грехи </a>
     <a href="/news/edit/{{ news.id }}" class="btn btn-success"> Редактировать </a>
 
