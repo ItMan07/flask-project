@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block title %}
-    Главная страница
+    Категории
 {% endblock title %}
 {% block content %}
-    <h1>Категория: {{ category_name }}</h1>
-    <p>Количество новостей в категории: <span class="badge badge-primary">{{ news|length }}</span></p>
+    <h2>Категория: {{ data.category_name }}</h2>
+    <p>Количество новостей в категории: <span class="badge badge-primary">{{ data.news|length }}</span></p>
     <hr>
-    {% for news in news %}
+    {% for news in data.news %}
         <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title">{{ news.title }}</h5>

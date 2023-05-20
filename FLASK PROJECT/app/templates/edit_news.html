@@ -2,15 +2,29 @@
 {% block title %} Редактирование {% endblock %}
 
 {% block content %}
-    <h1 class="text-center"> Редактирование лживой пропаганды </h1><br>
+    <h1 class="text-center"> Редактировать лживую пропаганду </h1><br>
     <hr>
     <form method="post" action="" novalidate>
         {{ form.csrf_token }}
         <div class="form-group">
             <label>
+                {{ form.category.label }}
+            </label>
+            {{ form.category(class="form-control", value=data.def_values[2]) }}
+        </div>
+        {% for error in form.category.errors %}
+            <div class="alert alert-danger" role="alert">
+                <span>
+                    {{ error }}
+                </span>
+            </div>
+        {% endfor %}
+
+        <div class="form-group">
+            <label>
                 {{ form.title.label }}
             </label>
-            {{ form.title(class="form-control") }}
+            {{ form.title(class="form-control", value=data.def_values[0]) }}
         </div>
         {% for error in form.title.errors %}
             <div class="alert alert-danger" role="alert">
@@ -24,10 +38,11 @@
             <label>
                 {{ form.text.label }}
             </label>
-            {{ form.text(class="form-control") }}
+            {{ form.text(class="form-control", value=data.def_values[1] ) }}
         </div>
+        <p>{{ data.def_values[1] }}</p>
         {% for error in form.text.errors %}
-            <div class="alert alert-danger" role="alert">
+            <div class="alert alert-danger" role="alert">ъ
                 <span>
                     {{ error }}
                 </span>
@@ -50,12 +65,6 @@
                     <label class="form-check-label">Не вызывать ОМОН</label>
                 </div>
             </fieldset>
-        </div>
-        <div class="row justify-content-center mt-3">
-            <h5>Категория:</h5>
-        </div>
-        <div class="row justify-content-center">
-            {{ form.category(class="form-select form-select-lg p-2") }}
         </div>
         <br>
         <h6 class="text-center">Нажимая данную кнопку вы добровольно подтверждаете, что

@@ -8,6 +8,20 @@
         {{ form.csrf_token }}
         <div class="form-group">
             <label>
+                {{ form.category.label }}
+            </label>
+            {{ form.category(class="form-control") }}
+        </div>
+        {% for error in form.category.errors %}
+            <div class="alert alert-danger" role="alert">
+                <span>
+                    {{ error }}
+                </span>
+            </div>
+        {% endfor %}
+
+        <div class="form-group">
+            <label>
                 {{ form.title.label }}
             </label>
             {{ form.title(class="form-control") }}
@@ -50,12 +64,6 @@
                     <label class="form-check-label">Не вызывать ОМОН</label>
                 </div>
             </fieldset>
-        </div>
-        <div class="row justify-content-center mt-3">
-            <h5>Категория:</h5>
-        </div>
-        <div class="row justify-content-center">
-            {{ form.category(class="form-select form-select-lg p-2") }}
         </div>
         <br>
         <h6 class="text-center">Нажимая данную кнопку вы добровольно подтверждаете, что

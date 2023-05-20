@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 <div id="wrapper">
     <header class="p-3 text-bg-dark bg-dark">
         <div class="container">
@@ -30,10 +30,10 @@
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 mb-md-0 justify-content-center">
                     <li><a href="/" class="nav-link mr-2 px-2 text-white btn btn-outline-light">Главная</a></li>
-                    <li><a href="/create_news" class="nav-link mr-2 px-2 text-white btn btn-outline-light">Создать
-                        ложь</a></li>
-                    <li><a href="/create_category" class="nav-link mr-2 px-2 text-white btn btn-outline-light">Категории
-                        лжи</a></li>
+                    <li><a href="/create_news" class="nav-link mr-2 px-2 text-white btn btn-outline-light">
+                        Создать ложь</a></li>
+                    <li><a href="/create_category" class="nav-link mr-2 px-2 text-white btn btn-outline-light">
+                        Категории лжи</a></li>
                     <li><a href="/about" class="nav-link px-2 text-white btn btn-outline-light">О проекте</a></li>
                 </ul>
 
@@ -43,9 +43,13 @@
                 </form>
 
                 <div class="nav text-end">
-                    <a href="/login" class="btn btn-success me-2 mr-1">Вход</a>
-                    <a href="/register" class="btn btn-warning mr-1">Регистрация</a>
-                    <a href="/logout" class="btn btn-danger mr-1">Выход</a>
+                    {% if data.is_auth %}
+                        <a href="/profile" class="btn btn-primary mr-1">Профиль</a>
+                        <a href="/logout" class="btn btn-danger mr-1">Выход</a>
+                    {% else %}
+                        <a href="/login" class="btn btn-success me-2 mr-1">Вход</a>
+                        <a href="/register" class="btn btn-warning mr-1">Регистрация</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -56,20 +60,27 @@
             <div class="col-md-8">
                 {% block content %} {% endblock %}
             </div>
-            <div class="col-md-4">
-                <h5>Категории лжи</h5>
 
-                <ul class="list-group">
-                    {% for item in categories %}
-                        <li class="list-group-item"><a
-                                href="{{ url_for('news_in_category', id=item.id) }}">{{ item.title }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
+            {% if data.show_categories %}
+                <div class="col-md-4">
+                    <h5>Категории лжи</h5>
+                    <ul class="list-group">
+                        {% for category in data.categories %}
+                            <li class="list-group-item"><a
+                                    href="{{ url_for('news_in_category', id=category.id) }}">{{ category.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {#            {% else %}#}
+                {#                <div class="col-md-12">#}
+                {#                    {% block content %} {% endblock %}#}
+                {#                </div>#}
+            {% endif %}
         </div>
     </div>
 
-    <footer id="footer" class="bg-dark text-white text-center py-3">
+    <footer id="footer" class="bg-dark text-white text-center py-3 footer mt-auto">
         &copy; 2023 Новости. Все права НЕ защищены.
     </footer>
 
