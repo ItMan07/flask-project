@@ -38,12 +38,18 @@
                 </a>
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 mb-md-0 justify-content-center">
-                    <li><a href="/" class="nav-link mr-2 px-2 text-white btn btn-outline-light">Главная</a></li>
-                    <li><a href="/create_news" class="nav-link mr-2 px-2 text-white btn btn-outline-light">
-                        Создать ложь</a></li>
-                    <li><a href="/create_category" class="nav-link mr-2 px-2 text-white btn btn-outline-light">
-                        Категории лжи</a></li>
-                    <li><a href="/about" class="nav-link px-2 text-white btn btn-outline-light">О проекте</a></li>
+                    <li><a href="/"
+                           class="nav-link mr-2 px-2 btn btn-outline-light">Главная</a>
+                    </li>
+                    <li><a href="/create_news"
+                           class="nav-link mr-2 px-2 btn btn-outline-light ">Создать ложь</a>
+                    </li>
+                    <li><a href="/create_category"
+                           class="nav-link mr-2 px-2 btn btn-outline-light">Категории лжи</a>
+                    </li>
+                    <li><a href="/about"
+                           class="nav-link px-2 btn btn-outline-light">О проекте</a>
+                    </li>
                 </ul>
 
                 <form class="nav col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
@@ -53,7 +59,7 @@
 
                 <div class="nav text-end">
                     {% if data.is_auth %}
-                        <a href="/profile" class="btn btn-primary mr-1">Профиль</a>
+                        <a href="{{ url_for('profile', user_id=1) }}" class="btn btn-primary mr-1">Профиль</a>
                         <a href="/logout" class="btn btn-danger mr-1">Выход</a>
                     {% else %}
                         <a href="/login" class="btn btn-success me-2 mr-1">Вход</a>
@@ -89,7 +95,7 @@
         </div>
     </div>
 
-    <footer id="footer" class="bg-dark text-white text-center py-3 footer">
+    <footer id="footer" class="bg-dark text-white text-center mt-4 py-3 footer">
         &copy; 2023 Новости. Все права НЕ защищены.
     </footer>
 </div>

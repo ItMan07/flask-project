@@ -70,11 +70,12 @@ def create_news():
 @app.route('/category/<int:id>')
 def news_in_category(id):
     data = {
+        'categories': Category.query.all(),
         'category': Category.query.get(id),
         'is_auth': True if current_user.is_authenticated else False,
         'news': Category.query.get(id).news,
-        'category_name': Category.query.get(id).title
-
+        'category_name': Category.query.get(id).title,
+        'show_categories': True
     }
     return render_template('category.html', data=data)
 
@@ -149,7 +150,6 @@ def register():
         user.password = generate_password_hash(form.password.data)
         db.session.add(user)
         db.session.commit()
-
         print('register user')
         return redirect(url_for('login'))
 
@@ -169,7 +169,6 @@ def login():
         username = form.username.data
         password = form.password.data
         user = User.query.filter_by(username=username).first()
-
         if user and check_password_hash(user.password, password):
             login_user(user)
             print('login user')
@@ -182,14 +181,13 @@ def login():
     return render_template('login.html', form=form, data=data)
 
 
-@app.route('/profile/<int:id>', methods=['GET', 'POST'])
-def profile():
+@app.route('/profile/<int:user_id>', methods=['GET', 'POST'])
+def profile(user_id):
     data = {
         'categories': Category.query.all(),
         'is_auth': True if current_user.is_authenticated else False,
         'show_categories': False
     }
-
     return render_template('profile.html', data=data)
 
 
