@@ -9,10 +9,19 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <style>
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+    </style>
 </head>
 
-<body class="d-flex flex-column min-vh-100">
-<div id="wrapper">
+{#<body class="d-flex flex-column min-vh-100">#}
+<body>
+<div id="wrapper" class="wrapper">
     <header class="p-3 text-bg-dark bg-dark">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -55,7 +64,7 @@
         </div>
     </header>
 
-    <div class="container my-3">
+    <div class="container my-3" style="flex:1">
         <div class="row">
             <div class="col-md-8">
                 {% block content %} {% endblock %}
@@ -80,10 +89,9 @@
         </div>
     </div>
 
-    <footer id="footer" class="bg-dark text-white text-center py-3 footer mt-auto">
+    <footer id="footer" class="bg-dark text-white text-center py-3 footer">
         &copy; 2023 Новости. Все права НЕ защищены.
     </footer>
-
 </div>
 
 <!-- Подключаем Bootstrap JS -->

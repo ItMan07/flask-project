@@ -7,6 +7,13 @@ from .forms import *
 from .models import *
 
 
+# TODO:
+#  1. БД: автор статьи
+#  2. БД: проверять админку
+#  3. БД: страница профиля
+#  4. доделать футер
+#  5. доделать редактирование (нет дефолтного значения категории и текста)
+
 @app.route('/')
 def index():
     data = {
@@ -115,7 +122,7 @@ def create_category():
     data = {
         'categories': Category.query.all(),
         'is_auth': True if current_user.is_authenticated else False,
-        'show_categories': False
+        'show_categories': True
     }
 
     if form.validate_on_submit():
